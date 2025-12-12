@@ -1,0 +1,1 @@
+docker run --name grain --platform linux/amd64 -p 6081:80 mglsj/grain:latest

@@ -1,0 +1,19 @@
+{
+  "train_csvfile" : "train.csv",
+  "test_csvfile" : "test.csv",
+  "csvfile" : "all.csv",
+  "P10": "P10",
+  "P16": "P16",
+  "P25": "P25",
+  "P50": "P50",
+  "P65": "P65",
+  "P75": "P75",
+  "P84": "P84",
+  "P90": "P90",
+  "P50mean": "P50mean",
+  "res_folder": "grain_sandsnap_70_30",
+  "name"  : "sandsnap_70_30",
+  "greyscale": true,
+  "dropout": 0.25,
+  "scale": false
+}

@@ -1,0 +1,1 @@
+docker run --name coin --platform linux/amd64 -p 6080:80 mglsj/yolo-coin:latest

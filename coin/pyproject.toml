@@ -1,0 +1,14 @@
+[project]
+name = "yolo-coin"
+version = "0.0.1"
+description = "yolo-coin"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+   "ultralytics>=8.3.235",
+   "fastapi[all]>=0.124.0",
+   "uvicorn[standard]>=0.38.0",
+]
+
+[build-system]
+requires = ["setuptools>=80.9.0"]
+build-backend = "setuptools.build_meta"
