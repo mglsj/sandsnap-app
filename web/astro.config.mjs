@@ -40,6 +40,9 @@ export default defineConfig({
 			}),
 		},
 	},
+	security: {
+		checkOrigin: false
+	},
 	output: "server",
 	session: undefined,
 	vite: {

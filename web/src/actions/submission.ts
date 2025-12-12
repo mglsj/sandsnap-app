@@ -22,17 +22,28 @@ const createSubmission = defineAction({
         const arrayBuffer = await input.image.arrayBuffer();
         const uint8Array = new Uint8Array(arrayBuffer);
 
-        const response = await uploadStream(uint8Array, {
-            folder: "sand",
-            resource_type: "image",
-        })
+        let response;
 
-        if (!response || !response.secure_url) {
+        try {
+            response = await uploadStream(uint8Array, {
+                folder: "sand",
+                resource_type: "image",
+            })
+        } catch (error) {
             throw new ActionError({
                 code: "INTERNAL_SERVER_ERROR",
                 message: "Image upload to cloudinary failed",
             })
+        } finally {
+            if (!response || !response.secure_url) {
+                throw new ActionError({
+                    code: "INTERNAL_SERVER_ERROR",
+                    message: "Image upload to cloudinary failed",
+                })
+            }
         }
+
+
 
         const results = await db
             .insert(Submission)

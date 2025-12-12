@@ -1,0 +1,39 @@
+name: sand_app
+
+services:
+  coin:
+    build: ./coin
+    container_name: coin
+    restart: unless-stopped
+
+  grain:
+    build: ./grain
+    container_name: grain
+    restart: unless-stopped
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - TF_FORCE_GPU_ALLOW_GROWTH=true
+    runtime: nvidia
+
+  web:
+    build: ./web
+    container_name: web
+    ports:
+      - "6080:80"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=80
+    restart: unless-stopped
+
+  queue:
+    build: ./queue
+    container_name: queue
+    environment:
+      - COIN_API=http://coin:80/predict
+      - GRAIN_API=http://grain:80/predict
+      - DATABASE_API=http://web:80/api/process/
+    depends_on:
+      - coin
+      - grain
+      - web
+    restart: unless-stopped

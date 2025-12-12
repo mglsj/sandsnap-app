@@ -7,14 +7,16 @@ cloudinary.config({
     api_secret: CLOUDINARY_API_SECRET,
 });
 
-
 const uploadStream = async (buffer: Uint8Array, options?: UploadApiOptions) => {
     return new Promise<UploadApiResponse | undefined>((resolve, reject) => {
         cloudinary.uploader
-            .upload_stream(options, (error, result) => {
-                if (error) return reject(error);
-                resolve(result);
-            }).end(buffer);
+            .upload_stream(
+                options,
+                (error, result) => {
+                    if (error) return reject(error);
+                    resolve(result);
+                })
+            .end(buffer);
     });
 }
 
