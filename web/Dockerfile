@@ -8,9 +8,12 @@ RUN bun run build
 
 FROM base AS production
 WORKDIR /app
+COPY .env .
 COPY --from=install /app/dist .
+COPY package.json bun.lock ./
+RUN bun install --production
 ENV NODE_ENV=production HOST=0.0.0.0 PORT=80
-CMD ["bun", "run", "./dist/server/entry.mjs"]
+CMD ["bun", "/server/entry.mjs"]
 
 
 
